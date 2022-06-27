@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hkd.dao.QuestionDao">
+<!--     String body;
+    String A;
+    String B;
+    String C;
+    String D;
+    String answer;
+
+     String courseName;//课程名
+    String startChapter;//开始章节
+    String endChapter;//结束章节
+    String difficultDegree;//难度系数
+    String total;//试题总数量-->
+    <select id="serachChoiceQuestion" resultType="choiceQuestion">
+        select body,A,B,`C`,D,answer
+        from choice_question,question_about
+        where choice_question.serialNumber = question_about.question_number
+          and (select course_name from course where question_about.question_number = course.course_type_number) = #{courseName}
+          and chapter between #{startChapter} and #{endChapter}
+          and difficult_degree = #{difficultDegree}
+    </select>
+
+</mapper>

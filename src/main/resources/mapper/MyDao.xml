@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hkd.dao.MyDao">
+<!--//课程名
+    String course_name;
+    //教师姓名
+    String teacher_name;
+    //班级总人数
+    int course_headcount;-->
+    <select id="searchAllMyCourse" resultType="myCourse">
+        select course_name,teacher_name,course_headcount
+        from my_course,course,teacher
+        where
+          username = #{username}
+          and my_course.course_number=course.course_type_number
+          and course.teacher_number=teacher.number
+    </select>
+<!--
+    Date exam_begin_time;
+    Date exam_end_time;
+    String exam_course;
+    Integer total;-->
+    <select id="searchAllMyExam" resultType="myExam">
+        select exam_begin_time,exam_end_time,exam_course,total
+        from my_exam
+        where username=#{username}
+    </select>
+<!--
+    String course_name;
+    String dead_line;
+    Integer totalNumber;-->
+    <select id="searchAllMyHomework" resultType="myHomework">
+        select course_name,dead_line,totalNumber
+        from my_homework
+        where username=#{username}
+    </select>
+</mapper>
